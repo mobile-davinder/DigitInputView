@@ -1,5 +1,8 @@
 # DigitInputView
 
+## Updates
+Bottom line width is 1px.
+
 [![CI Status](http://img.shields.io/travis/mnvoh/DigitInputView.svg?style=flat)](https://travis-ci.org/mnvoh/DigitInputView)
 [![Version](https://img.shields.io/cocoapods/v/DigitInputView.svg?style=flat)](http://cocoapods.org/pods/DigitInputView)
 [![License](https://img.shields.io/cocoapods/l/DigitInputView.svg?style=flat)](http://cocoapods.org/pods/DigitInputView)
@@ -13,7 +16,7 @@ DigitInputView is available through [CocoaPods](http://cocoapods.org). To instal
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "DigitInputView"
+pod "DigitInputView", :git => 'https://github.com/mobile-davinder/DigitInputView.git'
 ```
 
 Alternatively, you can simply copy `DigitInputView/Classes/DigitInputView.swift` into your project.
@@ -167,7 +170,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Author
 
-mnvoh, mnvoh90@gmail.com
+Davinder Singh
 
 ## License
 

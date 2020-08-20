@@ -1,5 +1,5 @@
 /**
- Copyright (c) 2017 Milad Nozari
+ Copyright (c) 2020 Davinder Singh
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -143,7 +143,7 @@ open class DigitInputView: UIView {
     fileprivate var textField: UITextField?
     fileprivate var tapGestureRecognizer: UITapGestureRecognizer?
     
-    fileprivate var underlineHeight: CGFloat = 4
+    fileprivate var underlineHeight: CGFloat = 1
     fileprivate var spacing: CGFloat = 8
     
     override open var canBecomeFirstResponder: Bool {
