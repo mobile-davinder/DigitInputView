@@ -28,7 +28,6 @@ public enum DigitInputViewAnimationType: Int {
 
 public protocol DigitInputViewDelegate: class {
     func digitsDidChange(digitInputView: DigitInputView)
-    func digitsDidFinish(digitInputView: DigitInputView)
 }
 
 open class DigitInputView: UIView {
@@ -104,18 +103,6 @@ open class DigitInputView: UIView {
         
     }
     
-    /**
-     UITextField text conent type. Enables and disables one time code.
-     */
-    open var isOneTimeCode: Bool = false {
-        
-        didSet {
-            setup()
-        }
-        
-    }
-    
-    
     /// The animatino to use to show new digits
     open var animationType: DigitInputViewAnimationType = .spring
     
@@ -135,7 +122,7 @@ open class DigitInputView: UIView {
         }
         
     }
-    
+
     open weak var delegate: DigitInputViewDelegate?
     
     fileprivate var labels = [UILabel]()
@@ -248,19 +235,6 @@ open class DigitInputView: UIView {
         textField?.keyboardType = keyboardType
         textField?.keyboardAppearance = keyboardAppearance
         
-        // Enabling/Disabling one time code
-        // .oneTimeCode content type available on iOS 12 and above devices
-        // One time code
-       
-        if isOneTimeCode {
-            if #available(iOS 12.0, *) {
-                textField?.textContentType = .oneTimeCode
-            }
-        }
-        else if #available(iOS 10.0, *){
-            textField?.textContentType = nil
-        }
-        
         // Since this function isn't called frequently, we just remove everything
         // and recreate them. Don't need to optimize it.
         
@@ -328,9 +302,7 @@ open class DigitInputView: UIView {
             // set the next digit bottom border color
             underlines[nextIndex - 1].backgroundColor = nextDigitBottomBorderColor
         }
-        else {
-            delegate?.digitsDidFinish(digitInputView: self)
-        }
+
         delegate?.digitsDidChange(digitInputView: self)
     }
     
@@ -349,7 +321,7 @@ open class DigitInputView: UIView {
             label.frame.origin.y = frame.height
             label.text = newText
             
-            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: { 
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
                 label.frame.origin.y = self.frame.height - label.frame.height
             }, completion: nil)
         }
@@ -362,29 +334,6 @@ open class DigitInputView: UIView {
             }, completion: nil)
         }
     }
-
-    /**
-     Resets input view to initial empty state
-    */
-    public func resetDigitInput() -> Bool {
-        guard let textField = self.textField else {
-            return false
-        }
-
-        textField.text = ""
-
-        for label in self.labels {
-            self.changeText(of: label, newText: "", true)
-        }
-
-        for (_, underline) in self.underlines.enumerated() {
-            underline.backgroundColor = bottomBorderColor
-        }
-
-        self.underlines.first?.backgroundColor = nextDigitBottomBorderColor
-
-        return true
-    }
     
 }
 
@@ -396,7 +345,7 @@ extension DigitInputView: UITextFieldDelegate {
         
         let char = string.cString(using: .utf8)
         let isBackSpace = strcmp(char, "\\b")
-        if isBackSpace == -92  && textField.text?.count ?? 0 > 0 {
+        if isBackSpace == -92 {
             textField.text!.removeLast()
             didChange(true)
             return false
