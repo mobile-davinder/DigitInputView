@@ -190,14 +190,12 @@ open class DigitInputView: UIView {
             characterHeight = characterWidth / ratio
         }
         
-        let extraSpace = 0
-        
         // font size should be less than the available vertical space
         let fontSize = characterHeight * 0.8
         
         let y = (frame.height - characterHeight) / 2
         for (index, label) in labels.enumerated() {
-            let x = extraSpace / 2 + (characterWidth + spacing) * CGFloat(index)
+            let x = (characterWidth + spacing) * CGFloat(index)
             label.frame = CGRect(x: x, y: y, width: characterWidth, height: characterHeight)
             
             underlines[index].frame = CGRect(x: x, y: frame.height - underlineHeight, width: characterWidth, height: underlineHeight)
