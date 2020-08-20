@@ -131,7 +131,7 @@ open class DigitInputView: UIView {
     fileprivate var tapGestureRecognizer: UITapGestureRecognizer?
     
     fileprivate var underlineHeight: CGFloat = 1
-    fileprivate var spacing: CGFloat = 8
+    fileprivate var spacing: CGFloat = 22
     
     override open var canBecomeFirstResponder: Bool {
         
@@ -190,7 +190,7 @@ open class DigitInputView: UIView {
             characterHeight = characterWidth / ratio
         }
         
-        let extraSpace = frame.width - CGFloat(numberOfDigits - 1) * spacing - CGFloat(numberOfDigits) * characterWidth
+        let extraSpace = 0
         
         // font size should be less than the available vertical space
         let fontSize = characterHeight * 0.8
