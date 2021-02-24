@@ -343,7 +343,7 @@ extension DigitInputView: UITextFieldDelegate {
         
         let char = string.cString(using: .utf8)
         let isBackSpace = strcmp(char, "\\b")
-        if isBackSpace == -92 {
+        if let text = textField.text, !text.isEmpty, isBackSpace == -92 {
             textField.text!.removeLast()
             didChange(true)
             return false
